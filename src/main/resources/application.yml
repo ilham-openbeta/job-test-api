@@ -1,0 +1,44 @@
+application:
+  jwt:
+    publicKey: ${API_PUBLIC_KEY:MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh4WtuOvZZaVZNXBqivn+GFb41UKITmpK447XBm6GUmIPetriwW6BAujpX96k/8XtwwrRaeVrPCNXH2F3bw13nXvgUrJ6zc4TNksxILFgkuuwFYXQbVsWztTDLrVtDlcoR2203Pqte0wlUhBJowl3cj5ZQ22f6Lrw8mhuzOd8vyedrD4DIuf34FNJL43tItaya99RFSdJnvW7s2eUdcIVBjqcoyatI7fwSOqlo0rJ2bdqXYvFtyGQhO4Od1mL+jrhP/9bLXUnZF3fWGQoA7v3KjR3lSIoo0zQxaS3zzDpVOHzqfpbLwRwAugL/ZblhqNhrJ2tw/kHpVW+qku++mT3uwIDAQAB}
+    privateKey: ${API_PRIVATE_KEY:MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCHha2469llpVk1cGqK+f4YVvjVQohOakrjjtcGboZSYg962uLBboEC6Olf3qT/xe3DCtFp5Ws8I1cfYXdvDXede+BSsnrNzhM2SzEgsWCS67AVhdBtWxbO1MMutW0OVyhHbbTc+q17TCVSEEmjCXdyPllDbZ/ouvDyaG7M53y/J52sPgMi5/fgU0kvje0i1rJr31EVJ0me9buzZ5R1whUGOpyjJq0jt/BI6qWjSsnZt2pdi8W3IZCE7g53WYv6OuE//1stdSdkXd9YZCgDu/cqNHeVIiijTNDFpLfPMOlU4fOp+lsvBHAC6Av9luWGo2Gsna3D+QelVb6qS776ZPe7AgMBAAECggEAdSfEEXuZ+TwizYa8JB6PYd01ya51hUxwJx5hlobPicKJ3UwCAPQVhT1yGlWv0Aj8TMM6W9BfjqKCe3dXt2IuCK+BMhxm+yluBF6mPrv4X6puE30VvKOlKPJXNTbT6zS/dlhJpUrz1AX0sWexMMdLQjDSG+9V8OxCxVwwhOSNO/WyRwR/NRccAhJQCTf0CUZxNiHAdYB7wqkNCOjdROXWke8M0QAk9NRYza7McslSuxoqqCavnNl46lA+pX84PIKbr/8GGMAWMWgkJapSWuJU/JNR1ExKtWB4WNFANYcBH4oGprBlALTZL+Tw1fXewE8RSNulAawZxxpEVhnpkEPvwQKBgQC97uM0ZIayIofS4wTQagqA/ECVX91HM6lHe8yE+kXC+GaWmDfNCuAK/8lXgj3HlgEsLJFpOubuCq2PKD4JcaWDME8xFcWJLhn1NBogN6RFWc0TiOnTpc5GqB2Kot2yzjhuOVkbRXa65fEEfaL3D44U0K77Vs7TyqdDHfwDimAM2wKBgQC2qZ5b+5LZjWGcA1yfAm4h2CYB+tylJ7FKu3nwQWviZFe1qoCYXWAPY78Oosxb9fqxAcZ+W87QPh9c3XTxWlT+sIBH2AcHt/FDR9WvoBQZL50Jvb2oOCmmdq5vCXRIEbdaDKIw38DgVsniqjGf/FdlMk4qhQ3YsOXo9rozTjtGoQKBgA02ZAnOAGy96DLsZfZVmht08M0zWQJN/rWhUA3kFxxECWbqed9CpWk+d/QldETBE53OD+OBHHVsurwdsYsYo8nnf2rLt+0eDuI22KZrGHtWjuSP/qwheaMCqONvBvscS2KnjKJQB71ip4yHbOHA7EJYbgO/+y1SiKYrnM9mPd5HAoGAOLMIA/dgSwV20g29F2KSuxC0I5MyIFXk05TEMg6spVaOX0awqhr58Wz95lYkZztAeOdbLOfkl4FhDNt1LGHk1jYFa8ejzwKK8l5+9wgSlQrRjS+Hior8ar6WQMNHhANzzZD0W4VpAnoOKry3sLiMjE4EM3Cfrq6ifyDvBXP4NGECgYBO1YS7iQMRTz84bJfA6Aiqrq66bfInvKu5JpSYsyaODBIZGjBvwTmHFGf+xwDdBw991eL3Zu29PB9xqc7kJ5nzL3sOTga0YP7r4VTyeN/HRqb4CUc10Ws4cU6bP1vNJqvXiN0OApqJgUJXIz0zrGkTE4/T8c5ISCgYArKfJ0k0Og==}
+    expirationMs: 86400000
+
+spring:
+  jpa:
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:dmp}
+    username: ${DB_USER:root}
+    password: ${DB_PASS:}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000
+      validation-timeout: 5000
+      idle-timeout: 60000
+      minimum-idle: 30
+      max-lifetime: 3600000
+      maximum-pool-size: 30
+      initialization-fail-timeout: 1
+
+http-conn-pool:
+  max-total: 20
+  default-max-per-route: 20
+  max-per-routes:
+    - scheme: http
+      host: localhost
+      port: 8080
+      max-per-route: 100
+    - scheme: http
+      host: dev3.dansmultipro.co.id
+      port: 80
+      max-per-route: 10
+
+dansmultipro:
+  base-url: http://dev3.dansmultipro.co.id
+  connection-request-timeout: 10000
+  connect-timeout: 10000
+  read-timeout: 10000
+  api:
+    list: ${dansmultipro.base-url}/api/recruitment/positions.json
+    detail: ${dansmultipro.base-url}/api/recruitment/positions/{ID}
